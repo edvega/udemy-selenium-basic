@@ -9,20 +9,20 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ImplicitWait {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 	
 		System.setProperty("webdriver.gecko.driver", 
-				"/home/edwin/Udemy/SeleniumWebDriver/drivers/geckodriver");
+				"D:\\eclipse\\selenium\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("https://www.alaskaair.com");
 		
 		driver.findElement(By.id("tab-hotels")).click();
 		driver.findElement(By.id("hotelOnlyToLocation")).sendKeys("nyc");
-		driver.findElement(By.id("hotelOnlyToLocation")).sendKeys(Keys.ENTER);
+		Thread.sleep(3000);
 		driver.findElement(By.id("hotelOnlyToLocation")).sendKeys(Keys.TAB);
-		driver.findElement(By.id("hotelFromDate")).sendKeys(Keys.ENTER);		
+		driver.findElement(By.id("hotelFromDate")).sendKeys(Keys.ENTER);
+				
 		driver.findElement(By.xpath("/html/body/div[4]/form/div[11]/div[2]/div[13]/section/div/div[16]/section/article[1]/div[2]/div[1]/a")).click();
-		
 	}
 }
