@@ -12,7 +12,7 @@ public class ImplicitWait {
 	public static void main(String[] args) throws InterruptedException {
 	
 		System.setProperty("webdriver.gecko.driver", 
-				"D:\\eclipse\\selenium\\geckodriver.exe");
+				"/home/edwin/Udemy/SeleniumWebDriver/drivers/geckodriver");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("https://www.alaskaair.com");
