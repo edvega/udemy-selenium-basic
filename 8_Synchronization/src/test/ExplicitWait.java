@@ -29,7 +29,7 @@ public class ExplicitWait {
 		driver.findElement(By.id("hotelFromDate")).sendKeys(Keys.ENTER);
 		
 		wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
+		wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("/html/body/div[4]/form/div[11]/div[2]/div[13]/section/div/div[16]/section/article[1]/div[2]/div[1]/a")));
 		
 		driver.findElement(By.xpath("/html/body/div[4]/form/div[11]/div[2]/div[13]/section/div/div[16]/section/article[1]/div[2]/div[1]/a")).click();
