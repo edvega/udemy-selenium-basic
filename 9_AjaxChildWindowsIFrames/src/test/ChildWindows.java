@@ -1,7 +1,6 @@
 package test;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +19,12 @@ public class ChildWindows {
 		System.out.println(driver.getTitle());
 		
 		Set<String> windowSet = driver.getWindowHandles();
-		Iterator<String> it = windowSet.iterator();
+		for (String id : windowSet) {
+			driver.switchTo().window(id);
+			System.out.println(driver.getTitle());
+		}
+		
+		/*Iterator<String> it = windowSet.iterator();
 		String parent = it.next();
 		String child = it.next();
 		
@@ -30,6 +34,6 @@ public class ChildWindows {
 		
 		driver.switchTo().window(parent);
 		System.out.println("Switching back to parent");
-		System.out.println(driver.getTitle());
+		System.out.println(driver.getTitle());*/
 	}
 }
