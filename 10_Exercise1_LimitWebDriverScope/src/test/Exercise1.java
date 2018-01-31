@@ -22,5 +22,11 @@ public class Exercise1 {
 		System.out.println("Links in footer section:");
 		WebElement footer = driver.findElement(By.id("glbfooter"));
 		System.out.println(footer.findElements(By.tagName("a")).size());
+		
+		WebElement sellColumn = driver.findElement(
+				By.xpath("/html/body/div[5]/footer/div[2]/table/tbody/tr/td[2]"));
+		for (WebElement link : sellColumn.findElements(By.tagName("a"))) {
+			System.out.println(link.getText());
+		}
 	}
 }
