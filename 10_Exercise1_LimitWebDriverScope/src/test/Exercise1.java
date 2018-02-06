@@ -25,8 +25,23 @@ public class Exercise1 {
 		
 		WebElement sellColumn = driver.findElement(
 				By.xpath("/html/body/div[5]/footer/div[2]/table/tbody/tr/td[2]"));
+		
+		String titleBeforeClick = driver.getTitle();
+		String titleAfterClick = titleBeforeClick;
+		
 		for (WebElement link : sellColumn.findElements(By.tagName("a"))) {
-			System.out.println(link.getText());
+			
+			//System.out.println(link.getText());
+			if (link.getText().contains("Site map")) {
+				link.click();
+				titleAfterClick = driver.getTitle();
+				break;
+			}
 		}
+		
+		boolean isSiteMapHeader = driver.getPageSource().contains("Sitemap");
+		
+		System.out.println(!titleBeforeClick.equals(titleAfterClick) && 
+				isSiteMapHeader	? "PASS" : "FAIL");
 	}
 }

@@ -24,7 +24,7 @@ public class ExplicitWait {
 		driver.findElement(By.id("hotelOnlyToLocation")).sendKeys("NYC");
 		
 		wait = new WebDriverWait(driver, 3);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[17]/ul")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[18]/ul")));
 		driver.findElement(By.id("hotelOnlyToLocation")).sendKeys(Keys.TAB);
 		driver.findElement(By.id("hotelFromDate")).sendKeys(Keys.ENTER);
 		
