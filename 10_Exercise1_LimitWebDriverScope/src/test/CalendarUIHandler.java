@@ -16,8 +16,15 @@ public class CalendarUIHandler {
 		WebDriver driver = new FirefoxDriver();
 		
 		driver.get("http://www.path2usa.com/travel-companions");
-		
 		driver.findElement(By.xpath("//*[@id='travel_date']")).click();
+		
+		while (!driver.findElement(
+				By.cssSelector("[class='datepicker-days'] [class='datepicker-switch']")).
+				getText().contains("April")) {
+			driver.findElement(
+					By.cssSelector("[class='datepicker-days'] [class='next']")).click();
+		}
+		
 		List<WebElement> days = driver.findElements(By.className("day"));
 		
 		for (WebElement day : days) {
