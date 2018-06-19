@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNG Example">
+	<test thread-count="5" name="Test Plan 1">
+		<classes>
+			<class name="test.Cases1">
+				<methods>
+					<include name="DemoTest1"/>
+				</methods>
+			</class>
+			<class name="test.Cases2" />
+		</classes>
+	</test>
+	<test name="LogIn Test Plan">
+		<classes>
+			<class name="test.Cases3">
+				<methods>
+					<exclude name="web.*" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
