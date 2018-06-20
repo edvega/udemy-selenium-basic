@@ -4,7 +4,7 @@
 	<test thread-count="5" name="Test Plan 1">
 		<groups>
 			<run>
-				<include name="group1" />
+				<exclude name="group1" />
 			</run>
 		</groups>
 		<classes>
