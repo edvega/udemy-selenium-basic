@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class Cases3 {
@@ -29,27 +30,28 @@ public class Cases3 {
 		System.out.println("afterMethod(");
 	}
 	
-	@Test
+	@Test(dependsOnMethods={"mobileLogin","apiLogin"})
 	public void webLogin() {
 		System.out.println("Logged in by web");
 	}
 	
-	@Test
+	@Test(timeOut=600)
 	public void mobileLogin() {
 		System.out.println("Logged in by mobile app");
 	}
 	
 	@Test
-	public void apiLogin() {
-		System.out.println("Logged in by API");
+	@Parameters({"URL"})
+	public void apiLogin(String url) {
+		System.out.println("Logged in by API: " + url);
 	}
 	
-	@Test
+	@Test(enabled=false)
 	public void webLoginOk() {
 		System.out.println("Web Log in OK");
 	}
 	
-	@Test
+	@Test(timeOut=400)
 	public void webLoginFail() {
 		System.out.println("Web log in Failed");
 	}
