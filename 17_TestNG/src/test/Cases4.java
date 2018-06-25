@@ -1,5 +1,13 @@
 package test;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -39,5 +47,37 @@ public class Cases4 {
 		data[2][1] = "3rdPass";
 		
 		return data;
+	}
+	
+	@Test
+	public void Login() {
+		
+		Properties properties = new Properties();
+		InputStream is = getClass().getResourceAsStream("/test/datadriven.properties");
+		
+		try {
+			properties.load(is);
+			System.out.println(properties.getProperty("username"));
+			
+			WebDriver driver;
+			String browser = properties.getProperty("browser");
+			
+			switch (browser) {
+			case "chrome":
+				driver = new ChromeDriver();
+				break;
+			case "firefox":
+				driver = new FirefoxDriver();
+				break;
+			default:
+				driver = new InternetExplorerDriver();
+				break;
+			}
+			
+			driver.get(properties.getProperty("url"));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
