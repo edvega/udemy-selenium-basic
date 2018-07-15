@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class Cases3 {
+public class Cases3 extends Cases4{
 
 	@BeforeClass
 	public void beforeClass() {
@@ -37,6 +37,7 @@ public class Cases3 {
 	
 	@Test(timeOut=600)
 	public void mobileLogin() {
+		Login();
 		System.out.println("Logged in by mobile app");
 	}
 	
