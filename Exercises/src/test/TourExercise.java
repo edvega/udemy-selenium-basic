@@ -71,18 +71,17 @@ public class TourExercise {
 			actions.click(confirmUser).sendKeys(properties.getProperty("user")).perform();
 			actions.click(submit).perform();
 			
-			if (driver.findElements(
-					By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td"
-							+ "/table/tbody/tr/td[2]/table/tbody/tr[3]/td/p[3]/a/font/b")).
-					isEmpty()) {
+			String newUserXpath = "/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td"
+					+ "/table/tbody/tr/td[2]/table/tbody/tr[3]/td/p[3]/a/font/b";
+			
+			if (driver.findElements(By.xpath(newUserXpath)).isEmpty()) {
 				System.out.println("Register FAILED!");
-			} else if (driver.findElement(
-					By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td"
-							+ "/table/tbody/tr/td[2]/table/tbody/tr[3]/td/p[3]/a/font/b")).
-					getText().equals(
-							"Note: Your user name is " + 
+				
+			} else if (driver.findElement(By.xpath(newUserXpath)).getText().
+					equals("Note: Your user name is " + 
 							properties.getProperty("user") + ".")) {
 				System.out.println("Register PASSED.");
+				
 			} else {
 				System.out.println("Register FAILED!");
 			}
