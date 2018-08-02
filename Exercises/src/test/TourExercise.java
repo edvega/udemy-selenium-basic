@@ -26,10 +26,6 @@ public class TourExercise {
 		TourExercise t = new TourExercise();
 		t.register(driver);
 		t.buyFlightTicket(driver);
-		
-		if (driver != null) {
-			driver.quit();
-		}
 	}
 	
 	
@@ -77,7 +73,6 @@ public class TourExercise {
 							+ "/table/tbody/tr/td[2]/table/tbody/tr[3]/td/p[3]/a/font/b")).
 					isDisplayed()) {
 				System.out.println("Register FAILED!");
-				return;
 			} else if (driver.findElement(
 					By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td"
 							+ "/table/tbody/tr/td[2]/table/tbody/tr[3]/td/p[3]/a/font/b")).
