@@ -31,6 +31,11 @@ public class TourExercise {
 		t.signIn(driver);
 		t.findFlight(driver);
 		t.selectFlight(driver);
+		t.purchaseTicket(driver);
+		
+		if (driver != null) {
+			driver.quit();
+		}
 	}
 	
 	
@@ -183,5 +188,50 @@ public class TourExercise {
 			return;
 		}
 		System.out.println("Select flight PASSED.");
+	}
+	
+	
+	public void purchaseTicket(WebDriver driver) {
+		
+		Properties properties = new Properties();
+		InputStream input = getClass().getResourceAsStream("/test/data.properties");
+		Actions actions = new Actions(driver);
+		
+		WebElement fName = driver.findElement(By.xpath("//input[@name='passFirst0']"));
+		WebElement lName = driver.findElement(By.xpath("//input[@name='passLast0']"));
+		WebElement ccNumber = driver.findElement(By.xpath("//input[@name='creditnumber']"));
+		WebElement ccFName = driver.findElement(By.xpath("//input[@name='cc_frst_name']"));
+		WebElement ccMName = driver.findElement(By.xpath("//input[@name='cc_mid_name']"));
+		WebElement ccLName = driver.findElement(By.xpath("//input[@name='cc_last_name']"));
+		WebElement submit = driver.findElement(By.xpath("//input[@name='buyFlights']"));
+		
+		try {
+			properties.load(input);
+			actions.click(fName).sendKeys(properties.getProperty("passenger_name")).perform();
+			actions.click(lName).sendKeys(properties.getProperty("passenger_lastname")).perform();
+			actions.click(ccNumber).sendKeys(properties.getProperty("card_number")).perform();
+			actions.click(ccFName).sendKeys(properties.getProperty("passenger_name")).perform();
+			actions.click(ccMName).sendKeys(properties.getProperty("passenger_middlename")).perform();
+			actions.click(ccLName).sendKeys(properties.getProperty("passenger_lastname")).perform();
+			driver.findElements(By.xpath("//input[@name='ticketLess']")).get(1).click();
+			actions.click(submit).perform();
+			
+			if (driver.findElements(
+					By.xpath("//img[@src='/images/masts/mast_confirmation.gif']")).
+					isEmpty()) {
+				System.out.println("Purchase ticket FAILED!");
+			} else if (driver.findElement(
+					By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/"
+							+ "tbody/tr[1]/td[2]/table/tbody/tr[3]/td/p/font/b/font[2]")).
+					getText().equals("Your itinerary has been booked!")) {
+				
+				System.out.println("Purchase ticket PASSED.");
+				driver.findElement(By.xpath("//img[@src='/images/forms/Logout.gif']")).click();
+			} else {
+				System.out.println("Purchase ticket FAILED!");
+			}			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
