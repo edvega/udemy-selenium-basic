@@ -2,6 +2,7 @@ package test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +20,7 @@ public class TourExercise {
 	public static void main(String[] args) {
 		
 		System.setProperty("webdriver.chrome.driver", 
-				"/home/edwin/Udemy/SeleniumWebDriver/drivers/chromedriver");
+				"C:\\workspace\\utils\\drivers\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -29,6 +30,7 @@ public class TourExercise {
 		t.register(driver);
 		t.signIn(driver);
 		t.findFlight(driver);
+		t.selectFlight(driver);
 	}
 	
 	
@@ -165,6 +167,21 @@ public class TourExercise {
 	
 	public void selectFlight(WebDriver driver) {
 		
+		List<WebElement> outFlight = driver.findElements(By.xpath("//input[@name='outFlight']"));
+		List<WebElement> inFlight = driver.findElements(By.xpath("//input[@name='inFlight']"));
 		
+		//Cheapest flights
+		outFlight.get(0).click();
+		inFlight.get(0).click();
+		
+		driver.findElement(By.xpath("//input[@name='reserveFlights']")).click();
+		
+		if (driver.findElements(
+				By.xpath("//img[@src='/images/masts/mast_book.gif']")).
+				isEmpty()) {
+			System.out.println("Select flight FAILED!");
+			return;
+		}
+		System.out.println("Select flight PASSED.");
 	}
 }
