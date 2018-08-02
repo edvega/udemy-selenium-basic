@@ -41,13 +41,15 @@ public class WikipediaExercise {
 				System.out.println("Album: " + album);
 			}
 		} else {
-			System.out.println("Number of albums distinct to 6.");
+			System.out.println("Number of albums distinct to " + discography.size());
 		}
 		
-		actions.moveToElement(driver.findElement(By.xpath("//*[@id=\"mw-content-text\"]/div/div[17]/table/tbody/tr[3]/td/div/ul/li[6]/i/a")))
+		actions.moveToElement(
+				driver.findElement(By.xpath("//*[@id=\"mw-content-text\"]/div/div[17]/table/tbody/tr[3]/td/div/ul/li[6]/i/a")))
 				.perform();
 		
-		if (!driver.findElement(By.xpath(("//div[@class='mwe-popups-container']"))).isDisplayed()) {
+		if (!driver.findElement(
+				By.xpath(("//div[@class='mwe-popups-container']"))).isDisplayed()) {
 			System.out.println("Reputation Album hover message not displayed!");
 		} else {
 			System.out.println("Hover message visible.");
