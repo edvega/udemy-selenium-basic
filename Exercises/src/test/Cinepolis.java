@@ -1,32 +1,30 @@
 package test;
 
-import java.util.concurrent.TimeUnit;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Cinepolis {
 	
 	public static void main(String[] args) {
 		
-		System.setProperty("webdriver.gecko.driver", 
-				"/home/edwin/Udemy/SeleniumWebDriver/drivers/geckodriver");
-		WebDriver driver = new FirefoxDriver();
-		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);	
+		System.setProperty("webdriver.chrome.driver", 
+				"/home/edwin/Udemy/SeleniumWebDriver/drivers/chromedriver");
+		WebDriver driver = new ChromeDriver();
 		driver.get("http://www.cinepolis.com");
 		Cinepolis movie = new Cinepolis();
 		
 		movie.selectCity(driver);
 		movie.closeVipAndXtremeTheaters(driver);
-		//movie.setTimeAndDateForNextDay(driver);
-		
+		movie.setTimeAndDateForNextDay(driver);
 	}
 	
 	public void selectCity(WebDriver driver) {
@@ -40,12 +38,7 @@ public class Cinepolis {
 	
 	
 	public void closeVipAndXtremeTheaters(WebDriver driver) {
-		
-		WebElement theaters = driver.
-				findElement(By.className("search-choice"));
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfAllElements(theaters));
-		
+				
 		for (WebElement movieTheater : driver.
 				findElements(By.className("search-choice"))) {
 			String text = movieTheater.findElement(By.tagName("span")).getText();
@@ -55,6 +48,8 @@ public class Cinepolis {
 				System.out.println("Removed " + text);
 			}
 		}
+		
+		
 	}
 	
 	
@@ -62,14 +57,23 @@ public class Cinepolis {
 		
 		Actions action = new Actions(driver);
 		Select day = new Select(driver.findElement(By.id("cmbFechas")));
-		WebElement sliderTo = driver.findElement(
-				By.xpath("//div[@id='slider-range']/a[2]"));
-		String timelimit = driver.findElement(By.className("rangoTiempo")).
-				getText().split(" - ")[1];
+		WebElement sliderTo = driver.findElement(By.xpath("//div[@id='slider-range']/a[2]"));
+		WebElement sliderFrom = driver.findElement(By.xpath("//div[@id='slider-range']/a"));
+		String timelimit = driver.findElement(By.className("rangoTiempo")).	getText();
 		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+		String timeFrom = timelimit.split(" - ")[0];
+		LocalTime from = LocalTime.parse(timeFrom, formatter);
+				
 		day.selectByIndex(2);
 		
-		while (!timelimit.contains("10:00 PM"))	{
+		if (from.isAfter(LocalTime.parse("10:00 PM", formatter))) {
+			while (!timeFrom.contains("7:00 PM")) {
+				action.click(sliderFrom).sendKeys(Keys.ARROW_LEFT).build().perform();
+			}
+		}
+		
+		while (!timelimit.split(" - ")[1].contains("10:00 PM"))	{
 			action.click(sliderTo).sendKeys(Keys.ARROW_LEFT).build().perform();
 		}
 	}
