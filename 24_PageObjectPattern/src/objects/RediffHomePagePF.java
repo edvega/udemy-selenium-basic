@@ -1,0 +1,41 @@
+package objects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class RediffHomePagePF {
+
+	private WebDriver driver;
+	
+	@FindBy(xpath="//*[@id='srch_show_hide_btn']/div[2]/u")
+	private WebElement searchLink;
+	
+	@FindBy(id="srchword")
+	private WebElement searchBox;
+	
+	@FindBy(xpath="//*[@id='queryTop']/div/input[6]")
+	private WebElement searchButton;
+	
+	public RediffHomePagePF(WebDriver driver) {
+		
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	public WebElement getSearchLink() {
+		
+		return searchLink;
+	}
+	
+	public WebElement getSearchBox() {
+		
+		return this.searchBox;
+	}
+	
+	public WebElement getSearchButton() {
+		
+		return this.searchButton;
+	}
+}
