@@ -25,7 +25,7 @@ public class HomePage extends Base {
 	}
 	
 	@Test(dataProvider="getData")
-	public void basePageNavigation(String username, String password, String text) {
+	public void validateLoginPage(String username, String password, String text) {
 		
 		Base.driver.get(this.base.getHomeUrl());
 		WebDriver driver = Base.driver;

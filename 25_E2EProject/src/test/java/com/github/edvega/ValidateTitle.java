@@ -25,7 +25,7 @@ public class ValidateTitle {
 	}
 	
 	@Test
-	public void basePageNavigation() {
+	public void validateAppTItle() {
 		
 		LandingPage page = new LandingPage(Base.driver);
 		Assert.assertEquals(page.getTitle().getText(), "FEATURED COURSE");

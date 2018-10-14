@@ -3,6 +3,7 @@
 <suite name="Suite">
 	<listeners>
 		<listener class-name="com.github.edvega.Listeners" />
+		<listener class-name="resources.ExtentReporterNG" />
 	</listeners>
 	<test thread-count="5" name="ValidateTitle">
 		<classes>

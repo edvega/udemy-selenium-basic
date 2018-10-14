@@ -76,10 +76,9 @@
 	
 		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
 		<dependency>
-			<groupId>com.aventstack</groupId>
+			<groupId>com.relevantcodes</groupId>
 			<artifactId>extentreports</artifactId>
-			<version>3.1.5</version>
-			<scope>provided</scope>
+			<version>2.41.2</version>
 		</dependency>
 			
 	</dependencies>
