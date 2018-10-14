@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class Base {
 	
 	private WebDriver driver;
+	private String homeUrl;
 
 	public WebDriver initializeDriver(){
 		
@@ -22,6 +23,7 @@ public class Base {
 		try {
 			properties.load(file);
 			String browser = properties.getProperty("browser");
+			this.homeUrl = properties.getProperty("url");
 			
 			switch (browser) {
 				case "chrome":
@@ -52,5 +54,21 @@ public class Base {
 	public WebDriver getDriver() {
 		
 		return this.driver;
-	}	
+	}
+	
+	public String getHomeUrl() {
+		
+		return this.homeUrl;
+	}
+	
+	public void tearDown(WebDriver driver) {
+		
+		if (driver != null) {
+			try {
+				driver.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

@@ -1,0 +1,6 @@
+14:53:02.166 [main] INFO  com.github.edvega.ValidateTitle - Driver is initialized
+14:53:25.700 [main] INFO  com.github.edvega.ValidateTitle - Navigated to Home Page
+14:53:25.797 [main] INFO  com.github.edvega.ValidateTitle - Successfully validated Text message
+14:53:47.115 [main] INFO  com.github.edvega.HomePage - Restricted user
+14:54:02.545 [main] INFO  com.github.edvega.HomePage - Non Restricted user
+14:54:02.592 [main] INFO  com.github.edvega.ValidateNavBar - Navigation Bar is displayed

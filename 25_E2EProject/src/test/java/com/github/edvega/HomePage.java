@@ -1,9 +1,13 @@
 package com.github.edvega;
 
+import org.testng.annotations.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import pageObjects.LandingPage;
 import pageObjects.LoginPage;
@@ -11,16 +15,27 @@ import resources.Base;
 
 public class HomePage extends Base {
 
+	private Base base = new Base();
+	private static Logger log = LogManager.getLogger(HomePage.class.getName());
+	
+	@BeforeTest
+	public void initialize() {
+		
+		this.base.initializeDriver();
+	}
+	
 	@Test(dataProvider="getData")
 	public void basePageNavigation(String username, String password, String text) {
 		
-		Base base = new Base();
-		base.initializeDriver();
-		WebDriver driver = base.getDriver();
-		
-		driver.get("http://qaclickacademy.com");
+		this.base.getDriver().get(this.base.getHomeUrl());
+		WebDriver driver = this.base.getDriver();
 		LandingPage page = new LandingPage(driver);
-		driver.findElement(By.xpath("//*[@id='homepage']/div[5]/div[2]/div/div/div/span/div/div[7]/div/div/div[2]")).click();
+		
+		String logInPopup = "//*[@id='homepage']/div[5]/div[2]/div/div/div/span/div/div[7]/div/div/div[2]";
+		if (!driver.findElements(By.xpath(logInPopup)).isEmpty()) {
+			driver.findElement(By.xpath(logInPopup)).click();
+		}
+		
 		page.getLogin().click();
 		
 		LoginPage login = new LoginPage(driver);
@@ -28,6 +43,7 @@ public class HomePage extends Base {
 		login.getPassword().sendKeys(password);
 		login.getSubmit().click();
 		System.out.println(text);
+		log.info(text);
 	}
 	
 	@DataProvider
@@ -43,5 +59,11 @@ public class HomePage extends Base {
 		data[1][2] = "Non Restricted user";
 		
 		return data;
+	}
+	
+	@AfterTest
+	public void tearDown() {
+		
+		this.base.tearDown(this.base.getDriver());
 	}
 }
