@@ -19,13 +19,13 @@ public class ValidateNavBar {
 	public void initialize() {
 		
 		this.base.initializeDriver();
-		this.base.getDriver().get(this.base.getHomeUrl());
+		Base.driver.get(this.base.getHomeUrl());
 	}
 	
 	@Test
 	public void basePageNavigation() {
 		
-		LandingPage page = new LandingPage(this.base.getDriver());
+		LandingPage page = new LandingPage(Base.driver);
 		Assert.assertTrue(page.getNavBar().isDisplayed());
 		log.info("Navigation Bar is displayed");
 	}
@@ -33,6 +33,6 @@ public class ValidateNavBar {
 	@AfterTest
 	public void tearDown() {
 		
-		this.base.tearDown(this.base.getDriver());
+		this.base.tearDown();
 	}
 }

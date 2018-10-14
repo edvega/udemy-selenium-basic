@@ -27,8 +27,8 @@ public class HomePage extends Base {
 	@Test(dataProvider="getData")
 	public void basePageNavigation(String username, String password, String text) {
 		
-		this.base.getDriver().get(this.base.getHomeUrl());
-		WebDriver driver = this.base.getDriver();
+		Base.driver.get(this.base.getHomeUrl());
+		WebDriver driver = Base.driver;
 		LandingPage page = new LandingPage(driver);
 		
 		String logInPopup = "//*[@id='homepage']/div[5]/div[2]/div/div/div/span/div/div[7]/div/div/div[2]";
@@ -64,6 +64,6 @@ public class HomePage extends Base {
 	@AfterTest
 	public void tearDown() {
 		
-		this.base.tearDown(this.base.getDriver());
+		this.base.tearDown();
 	}
 }

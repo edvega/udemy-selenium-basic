@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test thread-count="5" name="Test">
-    <classes>
-      <class name="com.github.edvega.ValidateTitle"/>
-      <class name="resources.Base"/>
-      <class name="com.github.edvega.AppTest"/>
-      <class name="com.github.edvega.HomePage"/>
-      <class name="com.github.edvega.ValidateNavBar"/>
-    </classes>
-  </test> <!-- Test -->
+	<listeners>
+		<listener class-name="com.github.edvega.Listeners" />
+	</listeners>
+	<test thread-count="5" name="ValidateTitle">
+		<classes>
+			<class name="com.github.edvega.ValidateTitle" />
+		</classes>
+	</test> <!-- Test -->
+	<test name="Test">
+		<classes>
+			<class name="resources.Base" />
+		</classes>
+	</test>
+	<test name="AppTest">
+		<classes>
+			<class name="com.github.edvega.AppTest" />
+		</classes>
+	</test>
+	<test name="HomePageTest">
+		<classes>
+			<class name="com.github.edvega.HomePage" />
+		</classes>
+	</test>
+	<test name="ValidateNavBar">
+		<classes>
+			<class name="com.github.edvega.ValidateNavBar" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->

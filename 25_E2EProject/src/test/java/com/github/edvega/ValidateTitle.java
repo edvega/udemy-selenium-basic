@@ -20,21 +20,21 @@ public class ValidateTitle {
 		
 		this.base.initializeDriver();
 		log.info("Driver is initialized");
-		this.base.getDriver().get(this.base.getHomeUrl());
+		Base.driver.get(this.base.getHomeUrl());
 		log.info("Navigated to Home Page");
 	}
 	
 	@Test
 	public void basePageNavigation() {
 		
-		LandingPage page = new LandingPage(this.base.getDriver());
-		Assert.assertEquals(page.getTitle().getText(), "FEATURED COURSES");
+		LandingPage page = new LandingPage(Base.driver);
+		Assert.assertEquals(page.getTitle().getText(), "FEATURED COURSE");
 		log.info("Successfully validated Text message");
 	}
 	
 	@AfterTest
 	public void tearDown() {
 		
-		this.base.tearDown(this.base.getDriver());
+		this.base.tearDown();
 	}
 }
