@@ -22,7 +22,7 @@ public class Base {
 	public WebDriver initializeDriver(){
 		
 		Properties properties = new Properties();
-		InputStream file = getClass().getResourceAsStream("data.properties");
+		InputStream file = Base.class.getResourceAsStream("data.properties");
 				
 		try {
 			properties.load(file);
