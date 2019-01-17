@@ -22,13 +22,15 @@ public class StepDefinitions extends Base {
         Base.driver = initializeDriver();
     }
 
-    @When("^user enters \"([^\"]*)\" and \"([^\"]*)\" and logs in$")
-    public void user_enters_something_and_something_and_logs_in(String strArg1, String strArg2) throws Throwable {
+    @When("^user enters (.+) and (.+) and logs in$")
+    public void user_enters_and_and_logs_in(String username, String password) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
     	LoginPage login = new LoginPage(Base.driver);
-		login.getMail().sendKeys(strArg1);
-		login.getPassword().sendKeys(strArg2);
+		login.getMail().sendKeys(username);
+		login.getPassword().sendKeys(password);
 		login.getSubmit().click();
     }
+    	
 
     @Then("^verify that user is successfully logged in$")
     public void verify_that_user_is_successfully_logged_in() throws Throwable {
@@ -51,6 +53,11 @@ public class StepDefinitions extends Base {
 		}
 		
 		page.getLogin().click();
+    }
+    
+    @And("^close browsers$")
+    public void close_browsers() throws Throwable {
+        Base.driver.quit();
     }
 
 }
